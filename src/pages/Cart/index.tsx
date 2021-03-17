@@ -14,6 +14,7 @@ interface Product {
   title: string;
   price: number;
   formatedPrice: string;
+  formatedSubtotalPrice: string;
   image: string;
   amount: number;
 }
@@ -24,6 +25,7 @@ const Cart = (): JSX.Element => {
   const cartFormatted = cart.map(product => ({
     ...product,
     formatedPrice: formatPrice(product.price),
+    formatedSubtotalPrice: formatPrice(product.price * product.amount),
   }))
   const total =
     formatPrice(
@@ -70,7 +72,7 @@ const Cart = (): JSX.Element => {
               </td>
               <td>
                 <strong>{product.title}</strong>
-                <span>R$ {product.formatedPrice}</span>
+                <span>{product.formatedPrice}</span>
               </td>
               <td>
                 <div>
@@ -98,7 +100,7 @@ const Cart = (): JSX.Element => {
                 </div>
               </td>
               <td>
-                <strong>R$ </strong>
+                <strong>{product.formatedSubtotalPrice}</strong>
               </td>
               <td>
                 <button
@@ -119,7 +121,7 @@ const Cart = (): JSX.Element => {
 
         <Total>
           <span>TOTAL</span>
-          <strong>R$ {total}</strong>
+          <strong>{total}</strong>
         </Total>
       </footer>
     </Container>
